@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.wcy.gen.mapper.ClubActMapper" >
+
+    <resultMap id="BaseResultMap" type="org.wcy.gen.model.ClubAct" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="via" property="via" jdbcType="VARCHAR" />
+        <result column="date" property="date" jdbcType="TIMESTAMP" />
+        <result column="address" property="address" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, name, via, date, address
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from club_act
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from club_act
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="org.wcy.gen.model.ClubAct" >
+        insert into club_act (id, name, via, 
+            date, address)
+        values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{via,jdbcType=VARCHAR}, 
+            #{date,jdbcType=TIMESTAMP}, #{address,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="org.wcy.gen.model.ClubAct" >
+        insert into club_act
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="via != null" >
+                via,
+            </if>
+            <if test="date != null" >
+                date,
+            </if>
+            <if test="address != null" >
+                address,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="via != null" >
+                #{via,jdbcType=VARCHAR},
+            </if>
+            <if test="date != null" >
+                #{date,jdbcType=TIMESTAMP},
+            </if>
+            <if test="address != null" >
+                #{address,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="org.wcy.gen.model.ClubAct" >
+        update club_act
+        <set >
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="via != null" >
+                via = #{via,jdbcType=VARCHAR},
+            </if>
+            <if test="date != null" >
+                date = #{date,jdbcType=TIMESTAMP},
+            </if>
+            <if test="address != null" >
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="org.wcy.gen.model.ClubAct" >
+        update club_act
+        set name = #{name,jdbcType=VARCHAR},
+            via = #{via,jdbcType=VARCHAR},
+            date = #{date,jdbcType=TIMESTAMP},
+            address = #{address,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
