@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ViewController {
 
-//    public String login
     @RequestMapping("/registered")
     public  String registered (){
         return "registered.html";
@@ -29,5 +28,6 @@ public class ViewController {
 
     @RequestMapping("/activePage")
     public String activePage () {return "activePage.html";}
+
 
 }

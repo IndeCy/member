@@ -165,4 +165,10 @@
             user_email = #{userEmail,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
+
+    <select id="selectAllUser" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from club_user
+    </select>
 </mapper>
