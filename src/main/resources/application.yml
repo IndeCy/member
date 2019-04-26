@@ -14,7 +14,7 @@ spring:
     destroy-method: close
     filters: stat
     maxActive: 5
-    initialSize: 1
+    initialSize: 1`
     maxWait: 60000
     minIdle: 1
     timeBetweenEvictionRunsMillis: 60000
@@ -40,8 +40,8 @@ spring:
       restart:
         enabled: true
     #静态文件
-    resources:
-      static-locations: classpath:/static
+#    resources:
+#      static-locations: classpath:/static
 
 mybatis:
   #实体类所做包

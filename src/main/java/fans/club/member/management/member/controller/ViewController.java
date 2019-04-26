@@ -17,4 +17,7 @@ public class ViewController {
     public String login(){
         return "index.html";
     }
+
+    @RequestMapping("/mainPage")
+    public String mainPage () {return "mainPage.html";}
 }
