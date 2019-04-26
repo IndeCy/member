@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/register")
+//@RequestMapping("/register")
 public class RegisterController {
 
     @Autowired
@@ -21,8 +21,5 @@ public class RegisterController {
         return memberService.register(user);
     }
 
-    @RequestMapping("/login")
-    public String login(){
-        return "login.html";
-    }
+
 }
