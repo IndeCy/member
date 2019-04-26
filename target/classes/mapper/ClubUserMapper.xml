@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.wcy.gen.mapper.ClubUserMapper" >
+<mapper namespace="ClubUserMapper" >
 
-    <resultMap id="BaseResultMap" type="org.wcy.gen.model.ClubUser" >
+    <resultMap id="BaseResultMap" type="fans.club.member.management.member.entity.ClubUser" >
         <id column="id" property="id" jdbcType="INTEGER" />
         <result column="user_name" property="userName" jdbcType="VARCHAR" />
         <result column="user_account" property="userAccount" jdbcType="VARCHAR" />
@@ -33,7 +33,7 @@
         where id = #{id,jdbcType=INTEGER}
     </delete>
 
-    <insert id="insert" parameterType="org.wcy.gen.model.ClubUser" >
+    <insert id="insert" parameterType="fans.club.member.management.member.entity.ClubUser" >
         insert into club_user (id, user_name, user_account, 
             user_password, user_phone, status, 
             user_ender, user_address, user_qq, 
@@ -44,7 +44,7 @@
             #{userEmail,jdbcType=VARCHAR})
     </insert>
 
-    <insert id="insertSelective" parameterType="org.wcy.gen.model.ClubUser" >
+    <insert id="insertSelective" parameterType="fans.club.member.management.member.entity.ClubUser" >
         insert into club_user
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="id != null" >
@@ -118,7 +118,7 @@
         </trim>
     </insert>
 
-    <update id="updateByPrimaryKeySelective" parameterType="org.wcy.gen.model.ClubUser" >
+    <update id="updateByPrimaryKeySelective" parameterType="fans.club.member.management.member.entity.ClubUser" >
         update club_user
         <set >
             <if test="userName != null" >
@@ -152,7 +152,7 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
-    <update id="updateByPrimaryKey" parameterType="org.wcy.gen.model.ClubUser" >
+    <update id="updateByPrimaryKey" parameterType="fans.club.member.management.member.entity.ClubUser" >
         update club_user
         set user_name = #{userName,jdbcType=VARCHAR},
             user_account = #{userAccount,jdbcType=VARCHAR},

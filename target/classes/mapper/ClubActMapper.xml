@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.wcy.gen.mapper.ClubActMapper" >
+<mapper namespace="ClubActMapper" >
 
-    <resultMap id="BaseResultMap" type="org.wcy.gen.model.ClubAct" >
+    <resultMap id="BaseResultMap" type="fans.club.member.management.member.entity.ClubAct" >
         <id column="id" property="id" jdbcType="INTEGER" />
         <result column="name" property="name" jdbcType="VARCHAR" />
         <result column="via" property="via" jdbcType="VARCHAR" />
@@ -26,14 +26,14 @@
         where id = #{id,jdbcType=INTEGER}
     </delete>
 
-    <insert id="insert" parameterType="org.wcy.gen.model.ClubAct" >
+    <insert id="insert" parameterType="fans.club.member.management.member.entity.ClubAct" >
         insert into club_act (id, name, via, 
             date, address)
         values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{via,jdbcType=VARCHAR}, 
             #{date,jdbcType=TIMESTAMP}, #{address,jdbcType=VARCHAR})
     </insert>
 
-    <insert id="insertSelective" parameterType="org.wcy.gen.model.ClubAct" >
+    <insert id="insertSelective" parameterType="fans.club.member.management.member.entity.ClubAct" >
         insert into club_act
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="id != null" >
@@ -71,7 +71,7 @@
         </trim>
     </insert>
 
-    <update id="updateByPrimaryKeySelective" parameterType="org.wcy.gen.model.ClubAct" >
+    <update id="updateByPrimaryKeySelective" parameterType="fans.club.member.management.member.entity.ClubAct" >
         update club_act
         <set >
             <if test="name != null" >
@@ -90,7 +90,7 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
-    <update id="updateByPrimaryKey" parameterType="org.wcy.gen.model.ClubAct" >
+    <update id="updateByPrimaryKey" parameterType="fans.club.member.management.member.entity.ClubAct" >
         update club_act
         set name = #{name,jdbcType=VARCHAR},
             via = #{via,jdbcType=VARCHAR},
