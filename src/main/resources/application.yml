@@ -1,6 +1,8 @@
 server:
   #当前服务端口号
   port: 8080
+  servlet:
+    context-path: /
 
 spring:
   datasource:
@@ -25,3 +27,21 @@ spring:
     removeAbandonedTimeout: 600
     poolPreparedStatements: true
     maxPoolPreparedStatementPerConnectionSize: 100
+    #热部署--静态资源立即生效
+    thymeleaf:
+      cache: false
+      encoding: UTF-8
+      mode: LEGACYHTML5
+      prefix: classpath:/templates/
+      suffix: .html,.jsp
+      check-template-location: true
+    #热部署生效
+    devtools:
+      restart:
+        enabled: true
+
+mybatis:
+  #实体类所做包
+  type-aliases-package: fans.club.member.management.member.entity
+  #mapper.xml所在位置
+  mapper-locations: classpath:mapper/*.xml

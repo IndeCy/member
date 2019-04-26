@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.wcy.gen.mapper.ClubMapper" >
+<mapper namespace="ClubMapper" >
 
-    <resultMap id="BaseResultMap" type="org.wcy.gen.model.Club" >
+    <resultMap id="BaseResultMap" type="fans.club.member.management.member.entity.Club" >
         <id column="id" property="id" jdbcType="INTEGER" />
         <result column="club_name" property="clubName" jdbcType="VARCHAR" />
         <result column="club_address" property="clubAddress" jdbcType="VARCHAR" />
@@ -25,14 +25,14 @@
         where id = #{id,jdbcType=INTEGER}
     </delete>
 
-    <insert id="insert" parameterType="org.wcy.gen.model.Club" >
+    <insert id="insert" parameterType="fans.club.member.management.member.entity.Club" >
         insert into club (id, club_name, club_address, 
             status)
         values (#{id,jdbcType=INTEGER}, #{clubName,jdbcType=VARCHAR}, #{clubAddress,jdbcType=VARCHAR}, 
             #{status,jdbcType=INTEGER})
     </insert>
 
-    <insert id="insertSelective" parameterType="org.wcy.gen.model.Club" >
+    <insert id="insertSelective" parameterType="fans.club.member.management.member.entity.Club" >
         insert into club
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="id != null" >
@@ -64,7 +64,7 @@
         </trim>
     </insert>
 
-    <update id="updateByPrimaryKeySelective" parameterType="org.wcy.gen.model.Club" >
+    <update id="updateByPrimaryKeySelective" parameterType="fans.club.member.management.member.entity.Club" >
         update club
         <set >
             <if test="clubName != null" >
@@ -80,7 +80,7 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
-    <update id="updateByPrimaryKey" parameterType="org.wcy.gen.model.Club" >
+    <update id="updateByPrimaryKey" parameterType="fans.club.member.management.member.entity.Club" >
         update club
         set club_name = #{clubName,jdbcType=VARCHAR},
             club_address = #{clubAddress,jdbcType=VARCHAR},
