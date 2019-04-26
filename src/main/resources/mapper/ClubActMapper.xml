@@ -98,4 +98,8 @@
             address = #{address,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
+
+    <select id="selectActList" resultMap="BaseResultMap">
+        select * from club_act
+    </select>
 </mapper>

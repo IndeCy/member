@@ -87,4 +87,8 @@
             status = #{status,jdbcType=INTEGER}
         where id = #{id,jdbcType=INTEGER}
     </update>
+
+    <select id="getClubList" resultMap="BaseResultMap">
+        select * from club;
+    </select>
 </mapper>

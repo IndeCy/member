@@ -4,6 +4,8 @@ package fans.club.member.management.member.dao;
 import fans.club.member.management.member.entity.Club;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface ClubMapper {
     int deleteByPrimaryKey(Integer id);
@@ -17,4 +19,6 @@ public interface ClubMapper {
     int updateByPrimaryKeySelective(Club record);
 
     int updateByPrimaryKey(Club record);
+
+    List<Club> getClubList();
 }
