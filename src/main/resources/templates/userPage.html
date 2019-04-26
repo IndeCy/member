@@ -19,7 +19,36 @@
     <script>
 		$(document).ready(function(){
 			$('#zlight-nav').zlightMenu();
+			var html;
+			$.ajax({
+			    url: "user/selectUserList",
+			    success:function(data){
+			             for(var index in data){
+			                var sex = data[index].userEnder == 1?"男":"女";
+                            var type = data[index].userType == 1 ? "管理员":"粉丝";
+                               html += "<tr>"
+                                            +"<td>" + data[index].id+ "</td>"
+                                            +"<td>" + data[index].userName+ "</td>"
+                                            +"<td>" + data[index].userAccount+ "</td>"
+                                            +"<td>" + data[index].userPhone+ "</td>"
+                                            +"<td>" + sex+ "</td>"
+                                            +"<td>" + data[index].userAddress+ "</td>"
+                                            +"<td>" + data[index].userQq+ "</td>"
+                                            +"<td>" + data[index].userEmail+ "</td>"
+                                            +"<td>" + type+ "</td>"
+                                            +"<td> <input type = 'button' value = '删除' class = 'btn btn-default' onclick = ''>  </td>"
+                                        "</tr>";
+                        }
+                        $(".table").append(html);
+			    }
+
+			})
+
+
+
 		});
+
+
 	</script>
 </head>
 <body>
@@ -82,42 +111,42 @@
             <p><h4 style="margin-top:30px;">Features:</h4>
             <ul>
                 <table class="table table-striped">
-                    <tr><td>姓名</td><td>性别</td><td>年龄</td><td>加入时间</td><td>中意战队</td></tr>
-                    <tr>
-                        <td>龙猫</td>
-                        <td>男</td>
-                        <td>99</td>
-                        <td>2019-04-26 08：00：00</td>
-                        <td>RNG</td>
-                    </tr>
-                    <tr>
-                        <td>水月</td>
-                        <td>女</td>
-                        <td>999</td>
-                        <td>2019-04-26 08：00：00</td>
-                        <td>SKT</td>
-                    </tr>
-                    <tr>
-                        <td>龙猫</td>
-                        <td>男</td>
-                        <td>99</td>
-                        <td>2019-04-26 08：00：00</td>
-                        <td>RNG</td>
-                    </tr>
-                    <tr>
-                        <td>龙猫</td>
-                        <td>男</td>
-                        <td>99</td>
-                        <td>2019-04-26 08：00：00</td>
-                        <td>RNG</td>
-                    </tr>
-                    <tr>
-                        <td>龙猫</td>
-                        <td>男</td>
-                        <td>99</td>
-                        <td>2019-04-26 08：00：00</td>
-                        <td>RNG</td>
-                    </tr>
+                    <tr><td>编号</td><td>姓名</td><td>账户</td><td>手机号</td><td>性别</td><td>地址</td><td>QQ号码</td><td>Email</td><td>用户身份</td><td>操作</td></tr>
+                    <!--<tr>-->
+                        <!--<td>龙猫</td>-->
+                        <!--<td>男</td>-->
+                        <!--<td>99</td>-->
+                        <!--<td>2019-04-26 08：00：00</td>-->
+                        <!--<td>RNG</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td>水月</td>-->
+                        <!--<td>女</td>-->
+                        <!--<td>999</td>-->
+                        <!--<td>2019-04-26 08：00：00</td>-->
+                        <!--<td>SKT</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td>龙猫</td>-->
+                        <!--<td>男</td>-->
+                        <!--<td>99</td>-->
+                        <!--<td>2019-04-26 08：00：00</td>-->
+                        <!--<td>RNG</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td>龙猫</td>-->
+                        <!--<td>男</td>-->
+                        <!--<td>99</td>-->
+                        <!--<td>2019-04-26 08：00：00</td>-->
+                        <!--<td>RNG</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td>龙猫</td>-->
+                        <!--<td>男</td>-->
+                        <!--<td>99</td>-->
+                        <!--<td>2019-04-26 08：00：00</td>-->
+                        <!--<td>RNG</td>-->
+                    <!--</tr>-->
                 </table>
             </ul>
         </div>
@@ -128,6 +157,7 @@
 </div> <!-- container close -->
 <script src="js/bootstrap.min.js"></script>
 <script src="js/respond.min.js"></script>
+
 
 </body>
 </html>
