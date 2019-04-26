@@ -18,6 +18,16 @@ public class ViewController {
         return "index.html";
     }
 
+    @RequestMapping("/clubPage")
+    public String clubPage () {return "clubPage.html";}
+
+    @RequestMapping("/userPage")
+    public String userPage () {return "userPage.html";}
+
     @RequestMapping("/mainPage")
     public String mainPage () {return "mainPage.html";}
+
+    @RequestMapping("/activePage")
+    public String activePage () {return "activePage.html";}
+
 }
