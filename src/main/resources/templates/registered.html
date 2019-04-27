@@ -204,6 +204,8 @@
 	            var userAccount = $('input[name="userAccount"]').val();
                 var userPhone = $('input[name="userPhone"]').val();
                 var userQq = $('input[name="userQq"]').val();
+                var userEmail = $('input[name="userEmail"]').val();
+                var userAddress = $('input[name="userAddress"]').val();
 	            var code = $('input[name="code"]').val();
 	            if (userName == '') {
 	                ErroAlert('请输入您的账号');
@@ -220,6 +222,10 @@
                     ErroAlert('请输入手机号');
                 }else if (userQq==""){
                     ErroAlert('请输入QQ号');
+                }else if (userEmail==""){
+                    ErroAlert('请输入Email');
+                }else if (userAddress==""){
+                    ErroAlert('请输入地址');
                 }else{
 	                //认证中..
 	                // fullscreen();
@@ -241,7 +247,7 @@
 	                <!--注册前拉起摄像头-->
 	                <!--LodingFun(userName);-->
 	                //注册
-	                userInfo = { userName: userName, userPassword: password, userAccount:userAccount,userPhone:userPhone};
+	                userInfo = { userName: userName, userPassword: password, userAccount:userAccount,userPhone:userPhone,status:1,userEnder:1,userAddress:userAddress,userType:2,userQq:userQq,userEmail:userEmail};
 	    			var url = "register/addMember";
 	    			AjaxPost(url, userInfo,
 	                                function () {
