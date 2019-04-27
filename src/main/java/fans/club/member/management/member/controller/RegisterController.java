@@ -5,6 +5,7 @@ import fans.club.member.management.member.entity.ResultCode;
 import fans.club.member.management.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +19,7 @@ public class RegisterController {
 
     @RequestMapping("/addMember")
     @ResponseBody
-    public String register(ClubUser user){
+    public ResultCode register(@RequestBody ClubUser user){
         return memberService.register(user);
     }
 

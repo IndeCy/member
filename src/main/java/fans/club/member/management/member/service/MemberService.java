@@ -3,6 +3,7 @@ package fans.club.member.management.member.service;
 import fans.club.member.management.member.dao.ClubUserMapper;
 import fans.club.member.management.member.entity.Club;
 import fans.club.member.management.member.entity.ClubUser;
+import fans.club.member.management.member.entity.ResultCode;
 import fans.club.member.management.member.entity.UserAct;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +16,12 @@ public class MemberService {
     @Resource
     private ClubUserMapper clubUserMapper;
 
-    public String register(ClubUser user){
+    public ResultCode register(ClubUser user){
         int i = clubUserMapper.insertSelective(user);
         if(i>0){
-            return "注册成功!";
+            return new ResultCode(1,"注册成功!");
         }else {
-            return "注册失败！请联系管理员！";
+            return new ResultCode(0,"注册失败，账号已存在！");
         }
     }
 
