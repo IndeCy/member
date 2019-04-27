@@ -46,11 +46,11 @@ public class ClubAct {
         this.via = via;
     }
 
-    public Date getActDate() {
+    public String getActDate() {
         return actDate;
     }
 
-    public void setActDate(Date actDate) {
+    public void setActDate(String actDate) {
         this.actDate = actDate;
     }
 
