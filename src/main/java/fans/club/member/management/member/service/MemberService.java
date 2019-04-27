@@ -17,7 +17,12 @@ public class MemberService {
     private ClubUserMapper clubUserMapper;
 
     public ResultCode register(ClubUser user){
-        int i = clubUserMapper.insertSelective(user);
+        int i = 0;
+        try {
+            i = clubUserMapper.insertSelective(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if(i>0){
             return new ResultCode(1,"注册成功!");
         }else {
