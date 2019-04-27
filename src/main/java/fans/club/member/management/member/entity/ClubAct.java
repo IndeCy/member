@@ -19,7 +19,7 @@ public class ClubAct {
 
     private String via;
 
-    private Date actDate;
+    private String actDate;
 
     private String address;
 
