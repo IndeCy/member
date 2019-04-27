@@ -10,6 +10,17 @@
         <result column="address" property="address" jdbcType="VARCHAR" />
     </resultMap>
 
+    <resultMap id="UserActResultMap" type="fans.club.member.management.member.entity.UserAct">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <id column="user_id" property="userId" jdbcType="INTEGER" />
+        <id column="act_id" property="actId" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="via" property="via" jdbcType="VARCHAR" />
+        <result column="date" property="date" jdbcType="TIMESTAMP" />
+        <result column="address" property="address" jdbcType="VARCHAR" />
+
+    </resultMap>
+
     <sql id="Base_Column_List" >
         id, name, via, date, address
     </sql>
@@ -102,4 +113,19 @@
     <select id="selectActList" resultMap="BaseResultMap">
         select * from club_act
     </select>
+
+    <select id="selectByName" resultMap="BaseResultMap">
+        select * from club_act where name = #{name}
+    </select>
+
+    <select id="selectUsersAct" resultMap="UserActResultMap">
+        select ca.name, ca.via, ca.date, ca.address,ua.* from club_act ca left JOIN  user_act ua on ca.id = ua.act_id
+         where ua.user_id = #{userId}
+    </select>
+
+    <delete id="deleteUsersAct" parameterType="java.lang.Integer">
+        delete from user_act where id = #{id}
+    </delete>
+
+
 </mapper>

@@ -91,4 +91,8 @@
     <select id="getClubList" resultMap="BaseResultMap">
         select * from club;
     </select>
+
+    <select id="selectByName" resultMap="BaseResultMap">
+        select * from club where club_name = #{name}
+    </select>
 </mapper>

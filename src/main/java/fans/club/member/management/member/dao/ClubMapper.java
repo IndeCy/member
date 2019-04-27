@@ -21,4 +21,6 @@ public interface ClubMapper {
     int updateByPrimaryKey(Club record);
 
     List<Club> getClubList();
+
+    Club selectByName(String name);
 }
