@@ -33,6 +33,9 @@ public class ViewController {
     @RequestMapping("/activePage")
     public String activePage () {return "activePage.html";}
 
+    @RequestMapping("/FansPage")
+    public String FansPage () {return "FansPage.html";}
+
 
 
 

@@ -222,7 +222,7 @@
                     ErroAlert('请输入QQ号');
                 }else{
 	                //认证中..
-	                fullscreen();
+	                // fullscreen();
 	                $('.login').addClass('test'); //倾斜特效
 	                setTimeout(function () {
 	                    $('.login').addClass('testtwo'); //平移特效
@@ -269,12 +269,13 @@
 	                                            //登录成功
 	                                            $('.login div').fadeOut(100);
 	                                            $('.success').fadeIn(1000);
-	                                            $('.success').html(data.Text);
+	                                            // $('.success').html(data.Text);
 												//跳转操作
-												window.location.href = "";
+                                                alert(data.url);
+												window.location.href = "login";
 	                                        } else {
 	                                            // AjaxErro(data.result);
-	                                           ErroAlert(data.result);
+	                                           ErroAlert(data.url);
 	                                        }
 	                                    }, 2400);
 	                                })

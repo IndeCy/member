@@ -192,9 +192,9 @@
 	                }, 500);
 	                //调用
 	                //登陆
-	                var userInfo = { userName: login, password: pwd, code: code };
+	                var userInfo = { userAccount: login, userPassword: pwd, code: code };
 					//此处做为ajax内部判断
-					var url = "user/login";
+					var url = "register/login";
 
 	                AjaxPost(url, userInfo,
 	                                function () {
@@ -224,10 +224,10 @@
 	                                            $('.success').fadeIn(1000);
 	                                            $('.success').html(data.Text);
 												//跳转操作
-												window.location.href = "/choose";
+												window.location.href =  data.url ;
 	                                        } else {
 	                                            // AjaxErro(data.result);
-	                                           ErroAlert(data.result);
+	                                           ErroAlert("账号密码不正确！");
 	                                        }
 	                                    }, 2400);
 	                                })
