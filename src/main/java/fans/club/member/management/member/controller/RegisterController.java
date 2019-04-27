@@ -25,7 +25,7 @@ public class RegisterController {
 
     @RequestMapping("/login")
     @ResponseBody
-    public ResultCode login(ClubUser user){
+    public ResultCode login(@RequestBody ClubUser user){
 
         if(null == memberService.login(user)){
             return new ResultCode(0,"");
