@@ -21,16 +21,16 @@
             $('#zlight-nav').zlightMenu();
             var html;
             $.ajax({
-                url: "club/selectClubList",
+                url: "act/selectClubActList",
                 async:false,
                 success:function(data){
                     for(var index in data){
-                        var sta = data[index].status==1?"开启":"关闭";
                         html += "<tr>"
                             +"<td>" + data[index].id+ "</td>"
-                            +"<td>" + data[index].clubName+ "</td>"
-                            +"<td>" + data[index].clubAddress+ "</td>"
-                            +"<td>" + sta+ "</td>"
+                            +"<td>" + data[index].name+ "</td>"
+                            +"<td>" + data[index].via+ "</td>"
+                            +"<td>" + data[index].date+ "</td>"
+                            +"<td>" + data[index].address+ "</td>"
                             +"<td> <button class ='btn btn-default del' data-id="+data[index].id+"> 删除 </button>  <button  class = 'btn btn-default update' data-id="+data[index].id+">更改</button> </td>"
                         "</tr>";
                     }
@@ -40,7 +40,7 @@
             //删除
             $(".del").click(function(){
                 $.ajax({
-                    url : "club/deleteClub?id="+$(this).attr("data-id"),
+                    url : "act/deleteClubAct?id="+$(this).attr("data-id"),
                     success : function(data){
                         alert(data);
                         window.location.reload();
@@ -51,14 +51,22 @@
             $(".update").click(function(){
                 $("table").css("display","none");
                 $("form").css("display","block");
+                var now = new Date();
+                //格式化日，如果小于9，前面补0
+                                var day = ("0" + now.getDate()).slice(-2);
+                //格式化月，如果小于9，前面补0
+                                var month = ("0" + (now.getMonth() + 1)).slice(-2);
+                //拼装完整日期格式
+                                var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
                 $.ajax({
-                    url : "club/selectClub?id="+$(this).attr("data-id"),
+                    url : "act/selectClubAct?id="+$(this).attr("data-id"),
                     dataType: "json",
                     success: function(data){
-                        $("#clubId").val(data.id);
-                        $("#clubName").val(data.clubName);
-                        $("#clubAddress").val(data.clubAddress);
-                        $(" select option[value='"+data.status+"']").attr("selected","selected");
+                        $("#actId").val(data.id);
+                        $("#actName").val(data.name);
+                        $("#address").val(data.address);
+                        $("#via").val(data.via);
+                        $("#date").val(today);
 
                     }
                 })
@@ -69,15 +77,23 @@
                 $("table").css("display","none");
                 $("form").css("display","none");
                 $(".addAUser").show();
+                var now = new Date();
+                //格式化日，如果小于9，前面补0
+                var day = ("0" + now.getDate()).slice(-2);
+                //格式化月，如果小于9，前面补0
+                var month = ("0" + (now.getMonth() + 1)).slice(-2);
+                //拼装完整日期格式
+                var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+                $("#date-add").val(today);
             })
             $("#user-add").click(function () {
-                if( $("#clubName").val().trim()==""|| $("#clubAddress").val().trim()=="" || $("#status").val().trim()==""){
+                if( $("#name-add").val().trim()==""|| $("#address-add").val().trim()=="" || $("#date-add").val().trim()=="" || $("#via-add").val().trim()==""){
                     alert("请完善信息");
-                    return;
+                    return false;
                 }
-                var data = "clubName="+ $("#clubName-add").val()+"&status="+$("#status-add").val()+"&clubAddress="+$("#clubAddress-add").val();
+                var data = "name="+ $("#name-add").val()+"&address="+$("#address-add").val()+"&via="+$("#via-add").val()+"&date="+$("#date-add").val();
                 $.ajax({
-                    url : "club/addClub?"+data,
+                    url : "act/addClubAct?"+data,
                     success: function(data){
                         alert(data);
                         window.location.reload();
@@ -112,7 +128,7 @@
                             <!--<li><a href="#">Link 3</a></li>-->
                         </ul>
                     </li>
-                    <li class="zlight-active">
+                    <li class="zlight-dropdown">
                         <a href="/clubPage">俱乐部管理</a>
                         <ul class="zlight-submenu">
                             <!--<li><a href="#">Link 1</a></li>-->
@@ -121,7 +137,7 @@
                             <!--<li><a href="#">Link 5</a></li>-->
                         </ul>
                     </li>
-                    <li><a href="/activePage">粉丝活动管理</a></li>
+                    <li class="zlight-active"><a href="/activePage">粉丝活动管理</a></li>
                     <li><a href="#">About</a></li>
                 </ul>
                 <!-- MOBILE NAV -->
@@ -139,43 +155,46 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <h4 class="zlight-hhh">俱乐部管理</h4>
+            <h4 class="zlight-hhh">活动管理</h4>
         </div>
     </div>
 
     <div class="row" style="margin-bottom:900px;">
         <div class="col-lg-12">
-            <p>Club Manager</p>
-            <p><button id="addUser" class="btn btn-default">添加俱乐部</button></p>
+            <p>Act Manager</p>
+            <p><button id="addUser" class="btn btn-default">添加活动</button></p>
             <p><h4 style="margin-top:30px;">Features:</h4>
             <ul>
                 <table class="table table-striped">
-                    <tr><td>编号</td><td>名称</td><td>地址</td><td>状态</td><td>操作</td></tr>
+                    <tr><td>编号</td><td>活动名称</td><td>参与路径</td><td>活动开始日期</td><td>地址</td><td>操作</td></tr>
                 </table>
             </ul>
         </div>
         <!--更改用户表单 -->
-        <form class="form-horizontal" style="display:none" onsubmit="return checkForm();" id="updateClub" action="club/editClub">
-            <input type="text" name="id" id="clubId" style="display: none;">
+        <form class="form-horizontal" style="display:none" onsubmit="return checkForm();" id="updateClub" action="act/editClubAct">
+            <input type="text" name="id" id="actId" style="display: none;">
             <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">俱乐部名称</label>
+                <label for="inputPassword3" class="col-sm-2 control-label">活动名称</label>
                 <div class="col-sm-10">
-                    <input type="text"  name="clubName" class="form-control" id="clubName" placeholder="Name">
+                    <input type="text"  name="name" class="form-control" id="actName" placeholder="Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">参加路径</label>
+                <div class="col-sm-10">
+                    <input type="text"  name="via" class="form-control" id="via" placeholder="Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">活动开始日期</label>
+                <div class="col-sm-10">
+                    <input type="date" name="date" class="form-control" id="date" placeholder="Data">
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputPassword3" class="col-sm-2 control-label">地址</label>
                 <div class="col-sm-10">
-                    <input type="text" name="clubAddress" class="form-control" id="clubAddress" placeholder="Address">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">状态</label>
-                <div class="col-sm-10">
-                    <select id ="status" class="form-control" name="status">
-                        <option value="1">开启</option>
-                        <option value="2">关闭</option>
-                    </select>
+                    <input type="text" name="address" class="form-control" id="address" placeholder="Address">
                 </div>
             </div>
             <div class="form-group">
@@ -189,28 +208,30 @@
         <div  id="addAUser" class="addAUser" style="display: none;">
             <input type="text" name="id" id="userId-add" style="display: none;">
             <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">俱乐部名称</label>
+                <label for="inputPassword3" class="col-sm-2 control-label">活动名称</label>
                 <div class="col-sm-10">
-                    <input type="text"  name="clubName-add" class="form-control" id="clubName-add" placeholder="Name">
+                    <input type="text"  name="name-add" class="form-control" id="name-add" placeholder="Name">
                 </div>
             </div>
-
+            <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">参加路径</label>
+                <div class="col-sm-10">
+                    <input type="text"  name="via-add" class="form-control" id="via-add" placeholder="VIA">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">活动开始日期</label>
+                <div class="col-sm-10">
+                    <input type="date" name="date-add" class="form-control" id="date-add" placeholder="Data">
+                </div>
+            </div>
             <div class="form-group">
                 <label for="inputPassword3" class="col-sm-2 control-label">地址</label>
                 <div class="col-sm-10">
-                    <input type="text" name="clubAddress-add" class="form-control" id="clubAddress-add" placeholder="Address">
+                    <input type="text" name="address-add" class="form-control" id="address-add" placeholder="Address">
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">状态</label>
-                <div class="col-sm-10">
-                    <select id ="status-add" class="form-control" name="status-add">
-                        <option value="1">开启</option>
-                        <option value="2">关闭</option>
-                    </select>
-                </div>
-            </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <button id = "user-add" class="btn btn-default">确定</button>
@@ -233,7 +254,7 @@
 <script>
     //提交修改
     function checkForm(){
-        if( $("#clubName").val().trim()==""|| $("#clubAddress").val().trim()=="" || $("#status").val().trim()==""){
+        if( $("#actName").val().trim()==""|| $("#address").val().trim()=="" || $("#date").val().trim()=="" || $("#via").val().trim()==""){
             alert("请完善信息");
             return false;
         }
