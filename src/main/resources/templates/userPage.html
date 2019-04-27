@@ -78,6 +78,7 @@
             // 添加
             $("#addUser").click(function(){
                 $("table").css("display","none");
+                $("form").css("display","none");
                 $(".addAUser").show();
             })
             $("#user-add").click(function () {
@@ -214,7 +215,7 @@
             <div class="form-group">
                 <label for="inputPassword3" class="col-sm-2 control-label">身份</label>
                 <div class="col-sm-10">
-                    <select id =="selectType" class="form-control" name="userType" disabled="disabled">
+                    <select id ="selectType" class="form-control" name="userType" disabled="disabled">
                         <option value="1">管理员</option>
                         <option value="2">粉丝</option>
                     </select>
