@@ -204,7 +204,6 @@
 	            var userAccount = $('input[name="userAccount"]').val();
                 var userPhone = $('input[name="userPhone"]').val();
                 var userQq = $('input[name="userQq"]').val();
-
 	            var code = $('input[name="code"]').val();
 	            if (userName == '') {
 	                ErroAlert('请输入您的账号');
@@ -217,7 +216,11 @@
 	            } else if (code.toUpperCase() != CodeVal.toUpperCase()){
 	            	ErroAlert('验证码错误');
 	            	Code();
-	            }else {
+	            }else if (userPhone==""){
+                    ErroAlert('请输入手机号');
+                }else if (userQq==""){
+                    ErroAlert('请输入QQ号');
+                }else{
 	                //认证中..
 	                fullscreen();
 	                $('.login').addClass('test'); //倾斜特效
@@ -235,11 +238,11 @@
 	                        queue: false
 	                    }).addClass('visible');
 	                }, 500);
-	                <!--//注册前拉起摄像头-->
+	                <!--注册前拉起摄像头-->
 	                <!--LodingFun(userName);-->
 	                //注册
-	                userInfo = { userName: userName, password: password, nickName:nickName};
-	    			var url = "user/registered";
+	                userInfo = { userName: userName, userPassword: password, userAccount:userAccount,userPhone:userPhone};
+	    			var url = "register/addMember";
 	    			AjaxPost(url, userInfo,
 	                                function () {
 	                                    //ajax加载中
