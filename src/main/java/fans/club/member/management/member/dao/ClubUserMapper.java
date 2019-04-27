@@ -25,6 +25,8 @@ public interface ClubUserMapper {
 
     ClubUser selectByName(String name);
 
+    ClubUser selectByAccount(String account);
+
     int insertUserAct (UserAct userAct);
 
 }

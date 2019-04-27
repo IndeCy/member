@@ -179,4 +179,8 @@
     <insert id="insertUserAct" parameterType="fans.club.member.management.member.entity.UserAct">
         insert into user_act (user_id,act_id) values (#{userId},#{actId})
     </insert>
+
+    <select id="selectByAccount" resultMap="BaseResultMap">
+        select * from club_user where user_account = #{account}
+    </select>
 </mapper>

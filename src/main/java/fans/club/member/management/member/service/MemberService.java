@@ -1,6 +1,7 @@
 package fans.club.member.management.member.service;
 
 import fans.club.member.management.member.dao.ClubUserMapper;
+import fans.club.member.management.member.entity.Club;
 import fans.club.member.management.member.entity.ClubUser;
 import fans.club.member.management.member.entity.UserAct;
 import org.springframework.stereotype.Service;
@@ -54,5 +55,17 @@ public class MemberService {
     public int insertUserAct(UserAct userAct){
         return clubUserMapper.insertUserAct(userAct);
     }
+
+    public ClubUser login(ClubUser user){
+        ClubUser loginuser =  clubUserMapper.selectByAccount(user.getUserAccount());
+        if(loginuser.getUserPassword().equals(user.getUserPassword())){
+            return loginuser;
+        }
+        else {
+            return null;
+        }
+
+    }
+
 
 }

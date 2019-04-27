@@ -1,6 +1,7 @@
 package fans.club.member.management.member.controller;
 
 import fans.club.member.management.member.entity.ClubUser;
+import fans.club.member.management.member.entity.ResultCode;
 import fans.club.member.management.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,5 +22,19 @@ public class RegisterController {
         return memberService.register(user);
     }
 
+    @RequestMapping("/login")
+    @ResponseBody
+    public ResultCode login(ClubUser user){
+
+        if(null == memberService.login(user)){
+            return new ResultCode(0,"");
+        }else {
+            if(user.getUserType()==1) {
+                return new ResultCode(1,"mainPage");
+            }else {
+                return new ResultCode(1,"FansPage");
+            }
+        }
+    }
 
 }

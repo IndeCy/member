@@ -6,7 +6,7 @@
         <id column="id" property="id" jdbcType="INTEGER" />
         <result column="name" property="name" jdbcType="VARCHAR" />
         <result column="via" property="via" jdbcType="VARCHAR" />
-        <result column="date" property="date" jdbcType="TIMESTAMP" />
+        <result column="act_date" property="actDate" jdbcType="TIMESTAMP" />
         <result column="address" property="address" jdbcType="VARCHAR" />
     </resultMap>
 
@@ -22,7 +22,7 @@
     </resultMap>
 
     <sql id="Base_Column_List" >
-        id, name, via, date, address
+        id, name, via, act_date, address
     </sql>
 
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -39,9 +39,9 @@
 
     <insert id="insert" parameterType="fans.club.member.management.member.entity.ClubAct" >
         insert into club_act (id, name, via, 
-            date, address)
+            act_date, address)
         values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{via,jdbcType=VARCHAR}, 
-            #{date,jdbcType=TIMESTAMP}, #{address,jdbcType=VARCHAR})
+            #{actDate,jdbcType=TIMESTAMP}, #{address,jdbcType=VARCHAR})
     </insert>
 
     <insert id="insertSelective" parameterType="fans.club.member.management.member.entity.ClubAct" >
@@ -56,8 +56,8 @@
             <if test="via != null" >
                 via,
             </if>
-            <if test="date != null" >
-                date,
+            <if test="actDate != null" >
+                act_date,
             </if>
             <if test="address != null" >
                 address,
@@ -73,8 +73,8 @@
             <if test="via != null" >
                 #{via,jdbcType=VARCHAR},
             </if>
-            <if test="date != null" >
-                #{date,jdbcType=TIMESTAMP},
+            <if test="actDate != null" >
+                #{act_date,jdbcType=TIMESTAMP},
             </if>
             <if test="address != null" >
                 #{address,jdbcType=VARCHAR},
@@ -91,8 +91,8 @@
             <if test="via != null" >
                 via = #{via,jdbcType=VARCHAR},
             </if>
-            <if test="date != null" >
-                date = #{date,jdbcType=TIMESTAMP},
+            <if test="actDate != null" >
+                act_date = #{actDate,jdbcType=TIMESTAMP},
             </if>
             <if test="address != null" >
                 address = #{address,jdbcType=VARCHAR},
@@ -105,7 +105,7 @@
         update club_act
         set name = #{name,jdbcType=VARCHAR},
             via = #{via,jdbcType=VARCHAR},
-            date = #{date,jdbcType=TIMESTAMP},
+            act_date = #{actDate,jdbcType=TIMESTAMP},
             address = #{address,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
@@ -119,7 +119,7 @@
     </select>
 
     <select id="selectUsersAct" resultMap="UserActResultMap">
-        select ca.name, ca.via, ca.date, ca.address,ua.* from club_act ca left JOIN  user_act ua on ca.id = ua.act_id
+        select ca.name, ca.via, ca.act_date, ca.address,ua.* from club_act ca left JOIN  user_act ua on ca.id = ua.act_id
          where ua.user_id = #{userId}
     </select>
 

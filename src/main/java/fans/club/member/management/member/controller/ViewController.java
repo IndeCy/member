@@ -1,11 +1,15 @@
 package fans.club.member.management.member.controller;
 
 
+import fans.club.member.management.member.entity.ClubUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class ViewController {
+
+
 
     @RequestMapping("/registered")
     public  String registered (){
@@ -28,6 +32,8 @@ public class ViewController {
 
     @RequestMapping("/activePage")
     public String activePage () {return "activePage.html";}
+
+
 
 
 }
