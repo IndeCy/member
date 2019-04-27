@@ -35,7 +35,7 @@ public interface ClubActMapper {
      * @param userId
      * @return
      */
-    List<ClubAct> selectUsersAct(int userId);
+    List<UserAct> selectUsersAct(int userId);
 
     /**
      * 删除用户订阅活动

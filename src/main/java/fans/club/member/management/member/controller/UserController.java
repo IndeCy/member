@@ -2,6 +2,7 @@ package fans.club.member.management.member.controller;
 
 import fans.club.member.management.member.common.GsonUtil;
 import fans.club.member.management.member.entity.ClubUser;
+import fans.club.member.management.member.entity.UserAct;
 import fans.club.member.management.member.service.MemberService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -44,6 +45,17 @@ public class UserController {
     @ResponseBody
     public String getUser(int id){
         return GsonUtil.toJson(memberService.getUser(id));
+    }
+
+    /**
+     * 用户增加订阅活动
+     * @param userAct
+     * @return
+     */
+    @RequestMapping("/orderUserAct")
+    @ResponseBody
+    public String orderUserAct(UserAct userAct){
+        return memberService.insertUserAct(userAct)>0 ? "订阅成功!":"订阅失败!";
     }
 
 

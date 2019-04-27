@@ -2,6 +2,7 @@ package fans.club.member.management.member.service;
 
 import fans.club.member.management.member.dao.ClubUserMapper;
 import fans.club.member.management.member.entity.ClubUser;
+import fans.club.member.management.member.entity.UserAct;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -50,5 +51,8 @@ public class MemberService {
         return user;
     }
 
+    public int insertUserAct(UserAct userAct){
+        return clubUserMapper.insertUserAct(userAct);
+    }
 
 }
