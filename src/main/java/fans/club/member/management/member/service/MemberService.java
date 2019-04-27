@@ -25,6 +25,11 @@ public class MemberService {
         }
     }
 
+    public String addUser(ClubUser user){
+        int i = clubUserMapper.insertSelective(user);
+        return "";
+    }
+
     public String edit(ClubUser user){
         int i = clubUserMapper.updateByPrimaryKey(user);
         if(i>0){

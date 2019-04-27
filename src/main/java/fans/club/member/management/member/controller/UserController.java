@@ -21,7 +21,7 @@ public class UserController {
     @RequestMapping("/addUser")
     @ResponseBody
     public String addUser(ClubUser user){
-        return memberService.register(user);
+        return memberService.addUser(user);
     }
 
     @RequestMapping("/editUser")
