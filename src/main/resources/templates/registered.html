@@ -269,12 +269,13 @@
 	                                            //登录成功
 	                                            $('.login div').fadeOut(100);
 	                                            $('.success').fadeIn(1000);
-	                                            $('.success').html(data.Text);
+	                                            // $('.success').html(data.Text);
 												//跳转操作
-												window.location.href = "";
+                                                alert(data.url);
+												window.location.href = "login";
 	                                        } else {
 	                                            // AjaxErro(data.result);
-	                                           ErroAlert(data.result);
+	                                           ErroAlert(data.url);
 	                                        }
 	                                    }, 2400);
 	                                })
