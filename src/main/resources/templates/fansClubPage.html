@@ -17,74 +17,7 @@
 
     <title>MainPage</title>
     <script>
-        $(document).ready(function(){
-            $('#zlight-nav').zlightMenu();
-            var html;
-            $.ajax({
-                url: "club/selectClubList",
-                async:false,
-                success:function(data){
-                    for(var index in data){
-                        var sta = data[index].status==1?"开启":"关闭";
-                        html += "<tr>"
-                            +"<td>" + data[index].id+ "</td>"
-                            +"<td>" + data[index].clubName+ "</td>"
-                            +"<td>" + data[index].clubAddress+ "</td>"
-                            +"<td>" + sta+ "</td>"
-                            +"<td> <button class ='btn btn-default del' data-id="+data[index].id+"> 删除 </button>  <button  class = 'btn btn-default update' data-id="+data[index].id+">更改</button> </td>"
-                        "</tr>";
-                    }
-                    $(".table").append(html);
-                }
-            })
-            //删除
-            $(".del").click(function(){
-                $.ajax({
-                    url : "club/deleteClub?id="+$(this).attr("data-id"),
-                    success : function(data){
-                        alert(data);
-                        window.location.reload();
-                    }
-                })
-            })
-            //更改
-            $(".update").click(function(){
-                $("table").css("display","none");
-                $("form").css("display","block");
-                $.ajax({
-                    url : "club/selectClub?id="+$(this).attr("data-id"),
-                    dataType: "json",
-                    success: function(data){
-                        $("#clubId").val(data.id);
-                        $("#clubName").val(data.clubName);
-                        $("#clubAddress").val(data.clubAddress);
-                        $(" select option[value='"+data.status+"']").attr("selected","selected");
 
-                    }
-                })
-            })
-
-            // 添加
-            $("#addUser").click(function(){
-                $("table").css("display","none");
-                $("form").css("display","none");
-                $(".addAUser").show();
-            })
-            $("#user-add").click(function () {
-                if( $("#clubName").val().trim()==""|| $("#clubAddress").val().trim()=="" || $("#status").val().trim()==""){
-                    alert("请完善信息");
-                    return;
-                }
-                var data = "clubName="+ $("#clubName-add").val()+"&status="+$("#status-add").val()+"&clubAddress="+$("#clubAddress-add").val();
-                $.ajax({
-                    url : "club/addClub?"+data,
-                    success: function(data){
-                        alert(data);
-                        window.location.reload();
-                    }
-                })
-            })
-        });
 
 
     </script>
@@ -149,9 +82,21 @@
             <p>Club Manager</p>
             <p><button id="addUser" class="btn btn-default">添加俱乐部</button></p>
             <p><h4 style="margin-top:30px;">Features:</h4>
+            <form class="form-inline">
+                <div class="form-group">
+                    <!--<label for="exampleInputName2">Name</label>-->
+                    <input type="text" class="form-control" id="clubNameSea" placeholder="ClubName">
+                </div>
+                <div class="form-group">
+                    <!--<label for="exampleInputEmail2">Email</label>-->
+                    <input type="text" class="form-control" id="statusSea" placeholder="Address">
+                </div>
+                <button type="button" id="search" class="btn btn-default">查询</button>
+            </form>
             <ul>
                 <table class="table table-striped">
-                    <tr><td>编号</td><td>名称</td><td>地址</td><td>状态</td><td>操作</td></tr>
+                    <thead><tr><th>编号</th><th>名称</th><th>地址</th><th>状态</th><th>操作</th></tr></thead>
+                    <tbody></tbody>
                 </table>
             </ul>
         </div>
@@ -232,9 +177,112 @@
 <script src="js/respond.min.js"></script>
 <script src="js/jquery.form.js"></script>
 <script>
+    $(document).ready(function(){
+            $('#zlight-nav').zlightMenu();
+            $.ajax({
+                url: "club/selectClubList",
+                async:false,
+                success:function(data){
+                    var html = "";
+                    for(var index in data){
+                        var sta = data[index].status==1?"开启":"关闭";
+                        html += "<tr>"
+                            +"<td>" + data[index].id+ "</td>"
+                            +"<td>" + data[index].clubName+ "</td>"
+                            +"<td>" + data[index].clubAddress+ "</td>"
+                            +"<td>" + sta+ "</td>"
+                            +"<td> <button class ='btn btn-default del' data-id="+data[index].id+"> 删除 </button>  <button  class = 'btn btn-default update' data-id="+data[index].id+">更改</button> </td>"
+                        "</tr>";
+                    }
+                    $(".table tbody").html(html);
+                    bindEvent()
+                }
+            })
+        });
+           function bindEvent(){
+             //删除
+            $(".del").click(function(){
+                $.ajax({
+                    url : "club/deleteClub?id="+$(this).attr("data-id"),
+                    success : function(data){
+                        alert(data);
+                        window.location.reload();
+                    }
+                })
+            })
+            //更改
+            $(".update").click(function(){
+                $("table").css("display","none");
+                $("form").css("display","block");
+                $.ajax({
+                    url : "club/selectClub?id="+$(this).attr("data-id"),
+                    dataType: "json",
+                    success: function(data){
+                        $("#clubId").val(data.id);
+                        $("#clubName").val(data.clubName);
+                        $("#clubAddress").val(data.clubAddress);
+                        $(" select option[value='"+data.status+"']").attr("selected","selected");
+
+                    }
+                })
+            })
+           }
+
+            // 添加
+            $("#addUser").click(function(){
+                $("table").css("display","none");
+                $("form").css("display","none");
+                $(".addAUser").show();
+            })
+            //搜索
+            $("#search").click(function(){
+                var clubName = $("#clubNameSea").val();
+                var status = $("#statusSea").val();
+                $(".table tbody").html(""); //清空table（除了第一行以外）;
+                $.ajax({
+                    url : "club/selectClubByConditions?clubName="+clubName+"&clubAddress="+status,
+                    dataType:"json",
+                    success:function(data){
+                            if(data){
+                             var html = "";
+                                for(var index in data){
+                                    var sta = data[index].status==1?"开启":"关闭";
+                                    html += "<tr>"
+                                    +"<td>" + data[index].id+ "</td>"
+                                    +"<td>" + data[index].clubName+ "</td>"
+                                    +"<td>" + data[index].clubAddress+ "</td>"
+                                    +"<td>" + sta+ "</td>"
+                                    +"<td> <button class ='btn btn-default del' data-id="+data[index].id+"> 删除 </button>  <button  class = 'btn btn-default update' data-id="+data[index].id+">更改</button> </td>"
+                                "</tr>";
+                                }
+                                $(".table tbody").html(html);
+                                bindEvent();
+                            }
+                    }
+                })
+            })
+
+
+            $("#user-add").click(function () {
+                if( $("#clubName-add").val().trim()==""|| $("#clubAddress-add").val().trim()==""){
+                    alert("请完善信息");
+                    return;
+                }
+                var data = "clubName="+ $("#clubName-add").val()+"&status="+$("#status-add").val()+"&clubAddress="+$("#clubAddress-add").val();
+                $.ajax({
+                    url : "club/addClub?"+data,
+                    success: function(data){
+                        alert(data);
+                        window.location.reload();
+                    }
+                })
+            })
+
+
+
     //提交修改
     function checkForm(){
-        if( $("#clubName").val().trim()==""|| $("#clubAddress").val().trim()=="" || $("#status").val().trim()==""){
+        if( $("#clubName").val().trim()==""|| $("#clubAddress").val().trim()==""){
             alert("请完善信息");
             return false;
         }
