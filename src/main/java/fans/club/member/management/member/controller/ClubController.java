@@ -45,4 +45,10 @@ public class ClubController {
     public Club getClub(int id){
         return clubService.getClub(id);
     }
+
+    @RequestMapping("/selectClubByConditions")
+    @ResponseBody
+    public List<Club> selectClubByConditions(Club club){
+        return clubService.selectClubsByConditions(club);
+    }
 }

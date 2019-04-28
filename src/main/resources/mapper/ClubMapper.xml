@@ -80,6 +80,19 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
+    <select id="selectClubByConditions" parameterType="fans.club.member.management.member.entity.Club" resultMap="BaseResultMap">
+        select * from club where 1=1
+        <if test="clubName != null" >
+            and club_name like concat('%',#{clubName},'%'}
+        </if>
+        <if test="clubAddress != null" >
+            and club_address like concat('%',#{clubAddress},'%'}
+        </if>
+        <if test="status != null" >
+            and status = #{status,jdbcType=INTEGER},
+        </if>
+    </select>
+
     <update id="updateByPrimaryKey" parameterType="fans.club.member.management.member.entity.Club" >
         update club
         set club_name = #{clubName,jdbcType=VARCHAR},

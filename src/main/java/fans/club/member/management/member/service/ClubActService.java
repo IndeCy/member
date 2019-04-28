@@ -1,6 +1,7 @@
 package fans.club.member.management.member.service;
 
 import fans.club.member.management.member.dao.ClubActMapper;
+import fans.club.member.management.member.entity.Club;
 import fans.club.member.management.member.entity.ClubAct;
 import fans.club.member.management.member.entity.UserAct;
 import org.springframework.stereotype.Service;
@@ -58,6 +59,10 @@ public class ClubActService {
     public ClubAct getClubAct(int id){
         ClubAct clubAct = clubActMapper.selectByPrimaryKey(id);
         return clubAct;
+    }
+
+    public List<ClubAct> selectActByConditions(ClubAct clubAct){
+        return clubActMapper.selectActByConditions(clubAct);
     }
 
 

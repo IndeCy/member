@@ -50,5 +50,8 @@ public class ClubService {
         return club;
     }
 
+    public List<Club> selectClubsByConditions(Club club){
+        return clubMapper.selectClubByConditions(club);
+    }
 
 }

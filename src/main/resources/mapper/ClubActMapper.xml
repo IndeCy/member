@@ -127,5 +127,21 @@
         delete from user_act where id = #{id}
     </delete>
 
+    <select id="selectActByConditions" parameterType="fans.club.member.management.member.entity.ClubAct" resultMap="BaseResultMap">
+        select * from club_act where 1=1
+        <if test="name != null" >
+            and name like concat('%',#{name},'%')
+        </if>
+        <if test="via != null">
+            and via like concat('%',#{via},'%')
+        </if>
+        <if test="actDate != null">
+            and act_date = #{actDate}
+        </if>
+        <if test="address != null">
+            and address like concat('%',#{address},'%')
+        </if>
+    </select>
+
 
 </mapper>

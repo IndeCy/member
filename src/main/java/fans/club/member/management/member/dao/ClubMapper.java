@@ -23,4 +23,6 @@ public interface ClubMapper {
     List<Club> getClubList();
 
     Club selectByName(String name);
+
+    List<Club> selectClubByConditions(Club club);
 }

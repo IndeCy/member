@@ -47,6 +47,12 @@ public class ActController {
         return clubActService.getClubAct(id);
     }
 
+    @RequestMapping("/selectClubActByConditions")
+    @ResponseBody
+    public List<ClubAct> selectClubActByConditions(ClubAct clubAct){
+        return clubActService.selectActByConditions(clubAct);
+    }
+
     /**
      * 删除用户订阅活动
      * @param id

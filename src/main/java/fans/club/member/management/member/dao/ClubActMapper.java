@@ -44,5 +44,7 @@ public interface ClubActMapper {
      */
     int deleteUsersAct(int id);
 
+    List<ClubAct> selectActByConditions(ClubAct clubAct);
+
 
 }
