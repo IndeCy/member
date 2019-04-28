@@ -40,15 +40,15 @@
                 <img alt="" src='/img/tick.png'>
             </div>
         </div>
-        <div class='login_fields__password'>
-            <div class='icon'>
-                <img alt="" src='/img/key.png'>
-            </div>
-            <input name="code" placeholder='验证码' maxlength="4" type="text"  autocomplete="off">
-            <div class='validation' style="opacity: 1; right: -5px;top: -3px;">
-                <canvas class="J_codeimg" id="myCanvas" onclick="Code();">对不起，您的浏览器不支持canvas，请下载最新版浏览器!</canvas>
-            </div>
-        </div>
+        <!--<div class='login_fields__password'>-->
+            <!--<div class='icon'>-->
+                <!--<img alt="" src='/img/key.png'>-->
+            <!--</div>-->
+            <!--<input name="code" placeholder='验证码' maxlength="4" type="text"  autocomplete="off">-->
+            <!--<div class='validation' style="opacity: 1; right: -5px;top: -3px;">-->
+                <!--<canvas class="J_codeimg" id="myCanvas" onclick="Code();">对不起，您的浏览器不支持canvas，请下载最新版浏览器!</canvas>-->
+            <!--</div>-->
+        <!--</div>-->
         <div class='login_fields__submit'>
             <input type='button' value='账号密码登录' style="width:100%">
         </div>
@@ -61,11 +61,11 @@
     <div class='success'>
     </div>
     <div class='disclaimer'>
-        <p><center>蜗牛，为梦想而生！</center></p>
-        <div>
-            <marquee scrollamount="1" behavior="scroll" style="height: 26px; width: 89%;" direction="right">🐌</marquee>
-            <P style="margin-top: -20px;">............................................................................💰</p>
-        </div>
+        <!--<p><center>蜗牛，为梦想而生！</center></p>-->
+        <!--<div>-->
+            <!--<marquee scrollamount="1" behavior="scroll" style="height: 26px; width: 89%;" direction="right">🐌</marquee>-->
+            <!--<P style="margin-top: -20px;">............................................................................💰</p>-->
+        <!--</div>-->
         <a href="/registered" style="color:#FFF;font-size: 10px;text-decoration: underline; ">还没有账号，点击注册</a>
     </div>
 </div>
@@ -101,7 +101,7 @@
 		// var truepwd = "mcwjs";
 
 		var CodeVal = 0;
-	    Code();
+	    <!--Code();-->
 	    function Code() {
 			if(canGetCookie == 1){
 				createCode("AdminCode");
@@ -167,12 +167,7 @@
 	                ErroAlert('请输入您的账号');
 	            } else if (pwd == '') {
 	                ErroAlert('请输入密码');
-	            } else if (code == '' || code.length != 4) {
-	                ErroAlert('输入验证码');
-	            } else if (code.toUpperCase() != CodeVal.toUpperCase()){
-	            	ErroAlert('验证码错误');
-	            	Code();
-	            }else {
+	            } else {
 	                //认证中..
 	                 <!--fullscreen();-->
 	                $('.login').addClass('test'); //倾斜特效
@@ -192,7 +187,7 @@
 	                }, 500);
 	                //调用
 	                //登陆
-	                var userInfo = { userAccount: login, userPassword: pwd, code: code };
+	                var userInfo = { userAccount: login, userPassword: pwd};
 					//此处做为ajax内部判断
 					var url = "register/login";
 
