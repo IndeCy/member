@@ -30,11 +30,20 @@ public class ViewController {
     @RequestMapping("/mainPage")
     public String mainPage () {return "mainPage.html";}
 
+    @RequestMapping("/activeMainPage")
+    public String activeMainPage () {return "fansMainPage.html";}
+
     @RequestMapping("/activePage")
     public String activePage () {return "activePage.html";}
 
     @RequestMapping("/FansPage")
     public String FansPage () {return "FansPage.html";}
+
+    @RequestMapping("/fansActivePage")
+    public String fansActivePage () {return "fansActivePage.html";}
+
+    @RequestMapping("/fansClubPage")
+    public String fansClubPage () {return "fansClubPage.html";}
 
 
 

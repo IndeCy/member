@@ -26,11 +26,11 @@ public class RegisterController {
     @RequestMapping("/login")
     @ResponseBody
     public ResultCode login(@RequestBody ClubUser user){
-
-        if(null == memberService.login(user)){
+        ClubUser clubUser = memberService.login(user);
+        if(null == clubUser){
             return new ResultCode(0,"");
         }else {
-            if(user.getUserType()==1) {
+            if(clubUser.getUserType()==1) {
                 return new ResultCode(1,"mainPage");
             }else {
                 return new ResultCode(1,"FansPage");
