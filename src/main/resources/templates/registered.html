@@ -91,15 +91,15 @@
                 <img alt="" src='/img/tick.png'>
             </div>
         </div>
-        <div class='login_fields__password'>
-            <div class='icon'>
-                <img alt="" src='/img/key.png'>
-            </div>
-            <input name = "code" placeholder='验证码' maxlength="4" type='text'  autocomplete="off">
-            <div class='validation' style="opacity: 1; right: -5px;top: -3px;">
-                <canvas class="J_codeimg" id="myCanvas" onclick="Code();">对不起，您的浏览器不支持canvas，请下载最新版浏览器!</canvas>
-            </div>
-        </div>
+        <!--<div class='login_fields__password'>-->
+            <!--<div class='icon'>-->
+                <!--<img alt="" src='/img/key.png'>-->
+            <!--</div>-->
+            <!--<input name = "code" placeholder='验证码' maxlength="4" type='text'  autocomplete="off">-->
+            <!--<div class='validation' style="opacity: 1; right: -5px;top: -3px;">-->
+                <!--<canvas class="J_codeimg" id="myCanvas" onclick="Code();">对不起，您的浏览器不支持canvas，请下载最新版浏览器!</canvas>-->
+            <!--</div>-->
+        <!--</div>-->
         <div class='login_fields__submit'>
             <input type='button' value='点击注册' style="width:100%">
         </div>
@@ -140,7 +140,7 @@
 		var ajaxmockjax = 1;//是否启用虚拟Ajax的请求响 0 不启用  1 启用
 
 		var CodeVal = 0;
-	    Code();
+	    <!--Code();-->
 	    function Code() {
 			if(canGetCookie == 1){
 				createCode("AdminCode");
@@ -206,18 +206,12 @@
                 var userQq = $('input[name="userQq"]').val();
                 var userEmail = $('input[name="userEmail"]').val();
                 var userAddress = $('input[name="userAddress"]').val();
-	            var code = $('input[name="code"]').val();
 	            if (userName == '') {
 	                ErroAlert('请输入您的账号');
 	            }else if (userAccount == '') {
 	                ErroAlert('请输入账号');
 	            }  else if (password == '') {
 	                ErroAlert('请输入密码');
-	            } else if (code == '' || code.length != 4) {
-	                ErroAlert('输入验证码');
-	            } else if (code.toUpperCase() != CodeVal.toUpperCase()){
-	            	ErroAlert('验证码错误');
-	            	Code();
 	            }else if (userPhone==""){
                     ErroAlert('请输入手机号');
                 }else if (userQq==""){
