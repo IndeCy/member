@@ -69,7 +69,7 @@ public class MemberService {
 
     public ClubUser login(ClubUser user){
         ClubUser loginuser =  clubUserMapper.selectByAccount(user.getUserAccount());
-        if(loginuser.getUserPassword().equals(user.getUserPassword())){
+        if(loginuser!=null && loginuser.getUserPassword().equals(user.getUserPassword())){
             return loginuser;
         }
         else {
